@@ -88,7 +88,7 @@ def detect_page_number(image_path: str) -> str:
         for attempt in range(MAX_RETRIES):
             try:
                 response = requests.post(url, headers=headers, data=json.dumps(payload), timeout=GEMINI_TIMEOUT)
-                print(response.json())
+                # print(response.json())
                 response.raise_for_status() # Raise an exception for HTTP errors (4xx or 5xx)
 
                 data = response.json()
