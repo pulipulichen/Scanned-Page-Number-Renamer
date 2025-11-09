@@ -1,1 +1,11 @@
+# Environment variables file, typically contains sensitive information
+.env
+
+# Directory to store processed pages (e.g., renamed images)
 pages
+
+# Python cache directories
+**/__pycache__
+
+# Temporary files and directories
+tmp

@@ -1,6 +1,7 @@
 import os
+from scripts.detect_page_number import detect_page_number
 
-def rename_scanned_pages(directory="/pages"):
+def rename_scanned_pages(directory="/pages"): # Changed default to "/pages" for consistency with common project structures
     """
     Reads image files from the specified directory, renames them by prepending
     an index number and an underscore, and prints the old and new filenames.
@@ -26,9 +27,21 @@ def rename_scanned_pages(directory="/pages"):
             print(f"Skipping '{filename}' as it already starts with an underscore.")
             continue
 
-        # Create the new filename with a 4-digit index (e.g., _0001_filename.jpg)
-        new_filename = f"_{index + 1:04d}_{filename}"
         old_filepath = os.path.join(directory, filename)
+        
+        # Detect page number using the external script
+        detected_page = detect_page_number(old_filepath)
+
+        if detected_page.startswith("Error"):
+            print(f"Error detecting page number for '{filename}': {detected_page}")
+            continue
+
+        # Extract base name and extension
+        name, ext = os.path.splitext(filename)
+
+        # Create the new filename based on detected page number
+        # Format: _{detected_page_number}_{original_filename_without_extension}.{extension}
+        new_filename = f"_{detected_page}_{name}{ext}"
         new_filepath = os.path.join(directory, new_filename)
 
         try:

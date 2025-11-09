@@ -2,7 +2,12 @@ version: '3.8'
 services:
   app:
     build: .
+    env_file:
+      - ./.env
     volumes:
       - .:/app
+      - ./main.py:/app/main.py
+      - ./requirements.txt:/app/requirements.txt
+      - ./scripts:/app/scripts
       - ./pages:/pages
     command: python main.py
