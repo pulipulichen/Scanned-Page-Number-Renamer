@@ -4,4 +4,5 @@ services:
     build: .
     volumes:
       - .:/app
+      - ./pages:/pages
     command: python main.py
