@@ -94,14 +94,18 @@ def detect_page_number(image_path: str) -> str:
                 data = response.json()
                 
                 # Check for prompt feedback blocking
-                pf = data.get("promptFeedback")
-                if pf and pf.get("blockReason"):
-                    raise RuntimeError(f"Prompt blocked by Gemini: {pf.get('blockReason')}")
+                try:
+                    pf = data.get("promptFeedback")
+                    if pf and pf.get("blockReason"):
+                        raise RuntimeError(f"Prompt blocked by Gemini: {pf.get('blockReason')}")
 
-                json_text = data["candidates"][0]["content"]["parts"][0]["text"]
-                parsed_response = json.loads(json_text)
-                
-                result = parsed_response.get("page_number", "Detection Failed")
+                    json_text = data["candidates"][0]["content"]["parts"][0]["text"]
+                    parsed_response = json.loads(json_text)
+                    
+                    result = parsed_response.get("page_number", "Detection Failed")
+                except Exception as e:
+                    # For Gemini Balance
+                    result = data["candidates"][0]["content"]["parts"][0]["text"]
 
 
                 # 如果result(現在是字串)是由數字組成，那把它轉換成4位數，前面補0
