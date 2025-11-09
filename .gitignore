@@ -9,3 +9,6 @@ pages
 
 # Temporary files and directories
 tmp
+
+# Ignore the TODO list file
+TODO.md
