@@ -45,7 +45,7 @@ def rename_scanned_pages(directory="/pages"): # Changed default to "/pages" for 
             eta = "N/A"
 
         progress_percentage = (processed_files / total_files) * 100
-        print(f"Processing: {progress_percentage:.2f}% ({processed_files}/{total_files}) - ETA: {eta}", end='\r')
+        print(f"Processing: {progress_percentage:.2f}% ({processed_files}/{total_files}) - ETA: {eta}")
 
         # ==================
 

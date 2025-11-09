@@ -19,7 +19,8 @@ SAFETY_SETTINGS = [
 
 api_key = os.environ.get("GOOGLE_API_KEY")
 gemini_model = os.environ.get("GEMINI_MODEL", "gemini-pro-vision") # Default to gemini-pro-vision
-prompt_text = os.environ.get("PROMPT_TEXT", "Detected page number, 'cover', or 'copyright'.")
+with open("/app/prompt.txt", "r", encoding="utf-8") as f:
+    prompt_text = f.read().strip()
 gemini_baseurl = os.environ.get("GEMINI_BASEURL", "https://generativelanguage.googleapis.com/") # Default to gemini-pro-vision
 
 # Define a simple response schema for page number detection
